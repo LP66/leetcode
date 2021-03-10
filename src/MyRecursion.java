@@ -236,3 +236,70 @@ class Solution78 {
     }
 
 }
+
+
+/**
+ * @decription: 17.电话号码的字母组合，需要回链接看题, https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
+ * @solution: 回溯
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
+ * @date: 2021/3/10
+ */
+class Solution17 {
+
+    public List<String> letterCombinations(String digits) {
+
+        List<String> ans = new LinkedList<>();
+        if (digits.length() == 0) {
+            return ans;
+        }
+
+        // 构建号码字母表
+        char[][] map = new char[10][4];
+        char c = 'a';
+        for (int i = 2; i < 10; i++) {
+            map[i][0] = c++;
+            map[i][1] = c++;
+            map[i][2] = c++;
+            if (i == 7 || i == 9) {
+                map[i][3] = c++;
+            }
+        }
+
+        // 构建用户输入号码串
+        int[] input = new int[digits.length()];
+        char[] chars = digits.toCharArray();
+        for (int i = 0; i < input.length; i++) {
+            input[i] = Integer.parseInt(String.valueOf(chars[i]));
+        }
+
+        // process
+        helper(map, input, 0, new StringBuilder(), ans);
+
+        return ans;
+    }
+
+    private void helper(char[][] map, int[] input, int idx, StringBuilder sb, List<String> ans) {
+        if (idx == input.length) {
+            ans.add(sb.toString());
+        } else {
+            int num = input[idx];
+            if (num == 7 || num == 9) {
+                // 输入7与9有四种字符可能
+                for (int i = 0; i < 4; i++) {
+                    sb.append(map[num][i]);
+                    helper(map, input, idx + 1, sb, ans);
+                    // 撤销
+                    sb.deleteCharAt(idx);
+                }
+            } else {
+                // 同理
+                for (int i = 0; i < 3; i++) {
+                    sb.append(map[num][i]);
+                    helper(map, input, idx + 1, sb, ans);
+                    sb.deleteCharAt(idx);
+                }
+            }
+        }
+    }
+}
