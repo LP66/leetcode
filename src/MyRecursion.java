@@ -303,3 +303,79 @@ class Solution17 {
         }
     }
 }
+
+
+/**
+ * @decription: 51.N皇后，根据给定的n，在n x n棋盘中放n个皇后，皇后间不能在同一行、列、对角线
+ * @solution: 回溯，利用set存储同列、同对角线的使用情况以进行排除不符合情况的状态，像棋盘下一行递归后回溯撤销上一步操作
+ * @difficulty: 复杂
+ * @url: https://leetcode-cn.com/problems/n-queens/
+ * @date: 2021/3/10
+ */
+class Solution51 {
+
+    public static void main(String[] args) {
+        System.out.println(new Solution51().solveNQueens(4));
+    }
+
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> res = new LinkedList<>();
+
+        int[] queens = new int[n];
+        Arrays.fill(queens, -1);
+
+        helper(0, n, queens, new HashSet<>(), new HashSet<>(), new HashSet<>(), res);
+        return res;
+    }
+
+
+    public void helper(int row, int n, int[] queens, HashSet<Integer> colSet,
+                       HashSet<Integer> diaSet1,  HashSet<Integer> diaset2, List<List<String>> res) {
+        if (row == n) {
+
+            res.add(buildBoard(queens));
+        } else {
+
+            for (int col = 0; col < n; col++) {
+
+                // 同列不可放
+                if (colSet.contains(col)) continue;
+                int dia1 = row - col;
+                // 同对角线不可放
+                if (diaSet1.contains(dia1)) continue;
+                int dia2 = row + col;
+                if (diaset2.contains(dia2)) continue;
+
+                queens[row] = col;
+                colSet.add(col);
+                diaSet1.add(dia1);
+                diaset2.add(dia2);
+
+                helper(row + 1, n, queens, colSet, diaSet1, diaset2, res);
+
+                // 回溯，撤销操作，回到"正确"状态
+                queens[row] = -1;
+                colSet.remove(col);
+                diaSet1.remove(dia1);
+                diaset2.remove(dia2);
+            }
+        }
+    }
+
+
+    public List<String> buildBoard(int[] queens) {
+        List<String> res = new LinkedList<>();
+        int n = queens.length;
+        for (int i = 0; i < n; i++) {
+            char[] row = new char[n];
+            Arrays.fill(row, '.');
+            int col = queens[i];
+            if (col != -1) {
+                row[col] = 'Q';
+            }
+            res.add(new String(row));
+        }
+        return res;
+    }
+
+}
