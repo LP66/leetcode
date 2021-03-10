@@ -285,7 +285,7 @@ class Solution17 {
         } else {
             int num = input[idx];
             if (num == 7 || num == 9) {
-                // 输入7与9有四种字符可能
+                // 输入7或9有四种字符可能
                 for (int i = 0; i < 4; i++) {
                     sb.append(map[num][i]);
                     helper(map, input, idx + 1, sb, ans);
@@ -330,7 +330,7 @@ class Solution51 {
 
 
     public void helper(int row, int n, int[] queens, HashSet<Integer> colSet,
-                       HashSet<Integer> diaSet1,  HashSet<Integer> diaset2, List<List<String>> res) {
+                       HashSet<Integer> diaSet1,  HashSet<Integer> diaSet2, List<List<String>> res) {
         if (row == n) {
 
             res.add(buildBoard(queens));
@@ -344,20 +344,20 @@ class Solution51 {
                 // 同对角线不可放
                 if (diaSet1.contains(dia1)) continue;
                 int dia2 = row + col;
-                if (diaset2.contains(dia2)) continue;
+                if (diaSet2.contains(dia2)) continue;
 
                 queens[row] = col;
                 colSet.add(col);
                 diaSet1.add(dia1);
-                diaset2.add(dia2);
+                diaSet2.add(dia2);
 
-                helper(row + 1, n, queens, colSet, diaSet1, diaset2, res);
+                helper(row + 1, n, queens, colSet, diaSet1, diaSet2, res);
 
                 // 回溯，撤销操作，回到"正确"状态
                 queens[row] = -1;
                 colSet.remove(col);
                 diaSet1.remove(dia1);
-                diaset2.remove(dia2);
+                diaSet2.remove(dia2);
             }
         }
     }
