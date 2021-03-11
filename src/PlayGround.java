@@ -106,3 +106,30 @@ class Two {
         return sum * sum;
     }
 }
+
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            List<Integer> level = new LinkedList<>();
+            int n = queue.size();
+            for (int i = 0; i < n; i++) {
+                TreeNode current = queue.poll();
+                level.add(current.val);
+                if (current.left != null) {
+                    queue.add(current.left);
+                }
+                if (current.right != null) {
+                    queue.add(current.right);
+                }
+            }
+            res.add(level);
+        }
+        return res;
+    }
+}

@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @description: 利用树的特性解决的问题
@@ -154,5 +155,40 @@ class Solution236 {
         if (leftAncestor == null) return rightAncestor;
         if (rightAncestor == null) return leftAncestor;
         return root;
+    }
+}
+
+
+/**
+ * @decription: 102.二叉树的层序遍历
+ * @solution: bfs，背起来
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
+ * @date: 2021/3/11
+ */
+class Solution102 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            List<Integer> level = new LinkedList<>();
+            int n = queue.size();
+            // 这个for i -> n 很妙，可以保证只将这一层加入level，下一层加入queue，并在处理完后将当前层加入结果集
+            for (int i = 0; i < n; i++) {
+                TreeNode current = queue.poll();
+                level.add(current.val);
+                if (current.left != null) {
+                    queue.add(current.left);
+                }
+                if (current.right != null) {
+                    queue.add(current.right);
+                }
+            }
+            res.add(level);
+        }
+        return res;
     }
 }
