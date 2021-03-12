@@ -107,24 +107,38 @@ class Two {
     }
 }
 
-
 class Solution {
-    public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> res = new LinkedList<>();
-        helper(1, n, k, new LinkedList<>(), res);
-        return res;
+
+    public static void main(String[] args) {
+        System.out.println(new Solution().threeSumClosest(new int[]{-3, 0, 1, 2}, 1));
     }
 
-    public void helper(int begin, int n, int k, List<Integer> current, List<List<Integer>> res) {
-        if (current.size() == k) {
-            res.add(new LinkedList<>(current));
-            return;
-        } else {
-            for (int i = begin; i < n; i++) {
-                current.add(i);
-                helper(i + 1, n, k, current, res);
-                current.remove(current.size() - 1);
+    public int threeSumClosest(int[] nums, int target) {
+        int res = target;
+        int minDiff = Integer.MAX_VALUE;
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0; i < n - 2; i++) {
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            int l = i + 1;
+            int r = n - 1;
+            while (l < r) {
+                int current = nums[i] + nums[l] + nums[r];
+                int diff = current - target;
+                int absDiff = Math.abs(diff);
+                if (absDiff < minDiff) {
+                    res = current;
+                    minDiff = absDiff;
+                }
+                if (diff < 0) {
+                    l++;
+                } else if (diff > 0) {
+                    r--;
+                }
+                while (l < r && nums[l + 1] == nums[l]) l++;
+                while (l < r && nums[r - 1] == nums[r]) r--;
             }
         }
+        return res;
     }
 }

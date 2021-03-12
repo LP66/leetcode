@@ -97,6 +97,39 @@ class Solution15 {
 
 
 /**
+ * @decription: 16.最接近的三数之和
+ * @solution: 三数之和改一改
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/3sum-closest/
+ * @date: 2021/3/12
+ */
+class Solution16 {
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int res = nums[0] + nums[1] + nums[2];
+        int n = nums.length;
+        for (int i = 0; i < n - 2; i++) {
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            int l = i + 1;
+            int r = n - 1;
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                res = Math.abs(sum - target) < Math.abs(res - target) ? sum : res;
+                if (sum < target) {
+                    l++;
+                } else if (sum > target) {
+                    r--;
+                } else {
+                    return res;
+                }
+            }
+        }
+        return res;
+    }
+}
+
+
+/**
  * @decription: 26.删除排序数组中的重复项，返回有效长度
  * @solution: 快慢指针，快慢指针数据不同时使慢指针后移，并将快指针内容覆盖慢指针内容
  *            总的来看就是，快指针未发现重复数据时总是在覆盖慢指针，当快指针遇到重复数据时，慢指针便停滞了

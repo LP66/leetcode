@@ -111,6 +111,7 @@ class Solution141_set {
  * @decription: 136.只出现一次的数字，返回给定数组中只出现一次的一个数字
  * @solution: 利用两个访问时间O(1)的Set，先假定所有数字只出现一次，第一次遍历全部加到结果集中
  *            第二次遍历用另一个set逐个add，false说明set中已存在此元素，此元素是重复出现的，则可以将结果集中对应的数去除
+ *            这里如果其他数只出现两次则只需要一个set，解法见Solution126_set2
  * @difficulty: 简单
  * @url: https://leetcode-cn.com/problems/single-number/
  * @date: 2021/3/12
@@ -128,6 +129,28 @@ class Solution136_set {
         Set<Integer> temp = new HashSet<>();
         for (int i : nums) {
             if (!temp.add(i)) {
+                resSet.remove(i);
+            }
+        }
+        return (int) resSet.toArray()[0];
+    }
+}
+
+
+/**
+ * @decription: 136.只出现一次的数字，返回给定数组中只出现一次的一个数字
+ * @solution: 利用两个访问时间O(1)的Set，先假定所有数字只出现一次，第一次遍历全部加到结果集中
+ *            第二次遍历用另一个set逐个add，false说明set中已存在此元素，此元素是重复出现的，则可以将结果集中对应的数去除
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/single-number/
+ * @date: 2021/3/12
+ */
+class Solution136_set2 {
+
+    public int singleNumber(int[] nums) {
+        Set<Integer> resSet = new HashSet<>();
+        for (int i : nums) {
+            if (!resSet.add(i)) {
                 resSet.remove(i);
             }
         }
