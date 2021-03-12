@@ -109,27 +109,22 @@ class Two {
 
 
 class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> res = new LinkedList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
-        if (root != null) {
-            queue.add(root);
-        }
-        while (!queue.isEmpty()) {
-            List<Integer> level = new LinkedList<>();
-            int n = queue.size();
-            for (int i = 0; i < n; i++) {
-                TreeNode current = queue.poll();
-                level.add(current.val);
-                if (current.left != null) {
-                    queue.add(current.left);
-                }
-                if (current.right != null) {
-                    queue.add(current.right);
-                }
-            }
-            res.add(level);
-        }
+        helper(1, n, k, new LinkedList<>(), res);
         return res;
+    }
+
+    public void helper(int begin, int n, int k, List<Integer> current, List<List<Integer>> res) {
+        if (current.size() == k) {
+            res.add(new LinkedList<>(current));
+            return;
+        } else {
+            for (int i = begin; i < n; i++) {
+                current.add(i);
+                helper(i + 1, n, k, current, res);
+                current.remove(current.size() - 1);
+            }
+        }
     }
 }

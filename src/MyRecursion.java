@@ -23,7 +23,7 @@ public class MyRecursion {
 
 
 /**
- * @decription: 20.括号生成，根据给定的n，生成所有可能n对括号
+ * @decription: 22.括号生成，根据给定的n，生成所有可能n对括号
  * @solution: 利用递归思想，最小子问题便是能不能加左括号，能不能加右括号
  * @difficulty: 中等
  * @url: https://leetcode-cn.com/problems/generate-parentheses/
@@ -78,6 +78,7 @@ class Solution46 {
             return;
         }
 
+        // 从经验来说，排列则要从0开始，因为前面的可能复用，组合则从传入的depth开始，因为前面要用也用过了
         for (int i = 0; i < length; i++) {
             if (!used[i]) {
                 current.addLast(nums[i]);

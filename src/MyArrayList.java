@@ -177,3 +177,37 @@ class Solution189_rotate {
         }
     }
 }
+
+
+/**
+ * @decription: 136.只出现一次的数字，返回给定数组中只出现一次的一个数字
+ * @solution: 利用排序+双指针，可以不使用额外空间复杂度
+ *            利用快慢指针比较，重复则同步递增下去
+ *            不重复时看是不是边界，边界直接返回
+ *            不是边界则要看再下一个数是否重复，不重复说明当前是只出现一次的
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/single-number/
+ * @date: 2021/3/12
+ */
+class Solution136 {
+    public int singleNumber(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int fast = 1, slow = 0; fast < n; fast++) {
+            if (nums[fast] == nums[slow++]) continue;
+            if (fast == 1) {
+                return nums[0];
+            }
+            if (fast == n - 1) {
+                return nums[fast];
+            }
+            if (nums[fast] != nums[fast + 1]) {
+                return nums[fast];
+            }
+        }
+        return -1;
+    }
+}

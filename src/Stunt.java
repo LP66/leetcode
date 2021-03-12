@@ -50,3 +50,18 @@ class Solution169_balance {
         return majI;
     }
 }
+
+
+/**
+ * @decription: 169.多数元素，返回数组中出现次数大于长度一半的元素
+ * @solution: 将数组排序，若出现次数大于一半，则此数一定也出现在数组中间位置
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/majority-element/
+ * @date: 2021/3/12
+ */
+class Solution169_sort {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+}
