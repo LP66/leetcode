@@ -66,6 +66,10 @@ class Solution20 {
  */
 class Solution46 {
 
+    public static void main(String[] args) {
+        System.out.println(new Solution46().permute(new int[]{0, 1, 2}));
+    }
+
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new LinkedList<>();
         helper(nums, 0, nums.length, new boolean[nums.length], new LinkedList<>(), ans);
@@ -78,12 +82,13 @@ class Solution46 {
             return;
         }
 
-        // 从经验来说，排列则要从0开始，因为前面的可能复用，组合则从传入的depth开始，因为前面要用也用过了
+        // 从经验来说，排列则要从0开始，因为前面的可能复用，组合、子集则从传入的depth开始，因为前面要用也用过了
         for (int i = 0; i < length; i++) {
             if (!used[i]) {
                 current.addLast(nums[i]);
                 used[i] = true;
 
+                // 排列传入depth + 1，组合、子集传 i + 1
                 helper(nums, depth + 1, length, used, current, ans);
 
                 // 回溯
@@ -220,6 +225,10 @@ class Solution169_rec {
  * @date: 2021/3/10
  */
 class Solution78 {
+
+    public static void main(String[] args) {
+        System.out.println(new Solution78().subsets(new int[] {1, 2, 3}));
+    }
 
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new LinkedList<>();

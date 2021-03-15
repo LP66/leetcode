@@ -157,3 +157,82 @@ class Solution136_set2 {
         return (int) resSet.toArray()[0];
     }
 }
+
+
+/**
+ * @decription: 3.无重复字符的最长子串
+ * @solution: 设置双指针为子串首尾，将当前子串用hashset保存每一个字符
+ *            移动右指针并检查hashset，重复则右移作指针重新开始一个字串的遍历
+ *            相当于暴力+hashset
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
+ * @date: 2021/3/15
+ */
+class Solution3 {
+
+    public static void main(String[] args) {
+        System.out.println(new Solution3().lengthOfLongestSubstring("abcd"));
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        if (s.isEmpty()) return 0;
+        char[] chars = s.toCharArray();
+        Set<Character> currentSub = new HashSet<>();
+        currentSub.add(chars[0]);
+        int max = 1;
+        for (int l = 0, r = 1; r < chars.length; ) {
+            char c = chars[r];
+            if (!currentSub.contains(c)) {
+                currentSub.add(c);
+                r++;
+            } else {
+                l++;
+                currentSub = new HashSet<>();
+                currentSub.add(chars[l]);
+                r = l + 1;
+            }
+            max = Math.max(r - l, max);
+        }
+        return max;
+    }
+}
+
+
+/**
+ * @decription: 692.前k个高频单词，输出顺序按频次多，频次相同则按字母小
+ * @solution: 遍历单词组，利用hashMap为每个单词计数
+ *            将计数装载到List中，利用api排序，自定义排序规则
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/top-k-frequent-words/
+ * @date: 2021/3/15
+ */
+class Solution692 {
+
+    public static void main(String[] args) {
+        System.out.println(new Solution692().topKFrequent(
+                new String[] {
+                        "i", "love", "leetcode", "i", "love", "coding"
+                }, 2
+        ));
+    }
+
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> count = new HashMap<>();
+        for (String current : words) {
+            count.put(current, count.getOrDefault(current, 0) + 1);
+        }
+        List<String> candidates = new LinkedList<>(count.keySet());
+        candidates.sort(new Comparator<String>() {
+            @Override
+            // 从小到大 o1 then o2
+            // 从大到小 o2 then o1
+            public int compare(String o1, String o2) {
+                int count1 = count.get(o1);
+                int count2 = count.get(o2);
+                // 若计数相同则按字符串从小到大排序，否则按计数从大到小排序
+                return count1 == count2 ? o1.compareTo(o2) : Integer.compare(count2, count1);
+            }
+        });
+        return candidates.subList(0, k);
+    }
+}
