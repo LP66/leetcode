@@ -65,3 +65,46 @@ class Solution169_sort {
         return nums[nums.length / 2];
     }
 }
+
+
+/**
+ * @decription: 200.岛屿数量，看有多数个被0围起来的1区域
+ * @solution: 利用dfs的思想，首先遍历，遇到1，dfs进去将当前陆地1四散开来dfs，走过的设为2不再进入
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/number-of-islands/
+ * @date: 2021/3/16
+ */
+class Solution200 {
+
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[r].length; c++) {
+                if (grid[r][c] == '1') {
+                    ++count;
+                    dfsAndRecord(grid, r, c);
+                }
+            }
+        }
+        return count;
+    }
+
+    private void dfsAndRecord(char[][] grid, int r, int c) {
+        // 出界，再见
+        if (r == -1 || r == grid.length || c == -1 || c == grid[r].length) {
+            return;
+        }
+        // 水或者走过，再见
+        if (grid[r][c] != '1') {
+            return;
+        }
+        // 设为走过
+        grid[r][c] = '2';
+        // 四散开来dfs掉当前这一区域的陆地块
+        dfsAndRecord(grid, r - 1, c);
+        dfsAndRecord(grid, r + 1, c);
+        dfsAndRecord(grid, r, c - 1);
+        dfsAndRecord(grid, r, c + 1);
+    }
+
+}
