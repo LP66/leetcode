@@ -192,3 +192,37 @@ class Solution102 {
         return res;
     }
 }
+
+
+/**
+ * @decription: 515.在每个树行中找最大值
+ * @solution: 层序遍历，每层比较max
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/
+ * @date: 2021/3/16
+ */
+class Solution515 {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < n; i++) {
+                TreeNode current = queue.poll();
+                max = Math.max(current.val, max);
+                if (current.left != null) {
+                    queue.add(current.left);
+                }
+                if (current.right != null) {
+                    queue.add(current.right);
+                }
+            }
+            res.add(max);
+        }
+        return res;
+    }
+}

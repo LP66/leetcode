@@ -162,7 +162,7 @@ class Solution136_set2 {
 /**
  * @decription: 3.无重复字符的最长子串
  * @solution: 设置双指针为子串首尾，将当前子串用hashset保存每一个字符
- *            移动右指针并检查hashset，重复则右移作指针重新开始一个字串的遍历
+ *            移动右指针并检查hashset，重复则右移左指针重新开始一个字串的遍历
  *            相当于暴力+hashset
  * @difficulty: 中等
  * @url: https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/
@@ -176,22 +176,19 @@ class Solution3 {
 
     public int lengthOfLongestSubstring(String s) {
         if (s.isEmpty()) return 0;
-        char[] chars = s.toCharArray();
-        Set<Character> currentSub = new HashSet<>();
-        currentSub.add(chars[0]);
         int max = 1;
+        char[] chars = s.toCharArray();
+        Set<Character> set = new HashSet<>();
+        set.add(chars[0]);
         for (int l = 0, r = 1; r < chars.length; ) {
-            char c = chars[r];
-            if (!currentSub.contains(c)) {
-                currentSub.add(c);
-                r++;
-            } else {
-                l++;
-                currentSub = new HashSet<>();
-                currentSub.add(chars[l]);
-                r = l + 1;
+            while (r < chars.length && !set.contains(chars[r])) {
+                set.add(chars[r++]);
             }
             max = Math.max(r - l, max);
+            r = ++l + 1;
+            if (chars.length - r < max) return max;
+            set = new HashSet<>();
+            set.add(chars[l]);
         }
         return max;
     }
