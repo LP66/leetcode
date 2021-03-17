@@ -389,3 +389,38 @@ class Solution51 {
     }
 
 }
+
+
+/**
+ * @decription: 322.零钱兑换，用最小数量货币凑出目标数
+ * @solution: 贪心+递归，先大力出奇迹，用尽量多的最大面值凑
+ *            最后凑不出来再回滚方法出栈，用"次优"继续，递归下去
+ *            凑出目标时比对当前方案是否最优
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/coin-change/
+ * @date: 2021/3/17
+ */
+class Solution322 {
+
+    int res = Integer.MAX_VALUE;
+
+    public int coinChange(int[] coins, int amount) {
+        if (amount == 0) return 0;
+        Arrays.sort(coins);
+        helper(coins, amount, coins.length - 1, 0);
+        return res == Integer.MAX_VALUE ? -1 : res;
+    }
+
+    private void helper(int[] coins, int amount, int depth, int count) {
+        if (amount == 0) {
+            res = Math.min(res, count);
+            return;
+        }
+        if (depth == -1) {
+            return;
+        }
+        for (int i = amount / coins[depth]; i >= 0 && count + i < res; i--) {
+            helper(coins, amount - i * coins[depth], depth - 1, count + i);
+        }
+    }
+}
