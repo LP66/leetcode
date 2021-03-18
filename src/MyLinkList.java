@@ -130,7 +130,7 @@ class Solution206 {
 
 
 /**
- * @decription: 两数相加，两条逆序存储数字的链表，每个节点一位数字，返回相同组织形式的两数之和
+ * @decription: 2.两数相加，两条逆序存储数字的链表，每个节点一位数字，返回相同组织形式的两数之和
  * @solution: 类似题415字符串相加，注意一下用head节点定头，有current节点打江山把后续节点加进去
  * @difficulty: 中等
  * @url: https://leetcode-cn.com/problems/add-two-numbers/
