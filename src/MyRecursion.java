@@ -38,7 +38,7 @@ class Solution20 {
         return res;
     }
 
-    private void generate(int left, int right, int max, String current) {
+    void generate(int left, int right, int max, String current) {
         if (right == max) {
             res.add(current);
             return;
@@ -76,7 +76,7 @@ class Solution46 {
         return ans;
     }
 
-    private void helper(int[] nums, int depth, int length, boolean[] used, Deque<Integer> current, List<List<Integer>> ans) {
+    void helper(int[] nums, int depth, int length, boolean[] used, Deque<Integer> current, List<List<Integer>> ans) {
         if (depth == length) {
             ans.add(new LinkedList<>(current));
             return;
@@ -118,7 +118,7 @@ class Solution47 {
         return ans;
     }
 
-    private void helper(int[] nums, int depth, int length, boolean[] used, Deque<Integer> current, List<List<Integer>> ans) {
+    void helper(int[] nums, int depth, int length, boolean[] used, Deque<Integer> current, List<List<Integer>> ans) {
         if (depth == length) {
             ans.add(new LinkedList<>(current));
             return;
@@ -157,7 +157,7 @@ class Solution77 {
         return ans;
     }
 
-    private void helper(int n, int k, int begin, List<List<Integer>> ans, Deque<Integer> current) {
+    void helper(int n, int k, int begin, List<List<Integer>> ans, Deque<Integer> current) {
         if (current.size() == k) {
             ans.add(new LinkedList<>(current));
             return;
@@ -186,7 +186,7 @@ class Solution169_rec {
         return helper(nums, 0, nums.length - 1);
     }
 
-    public int helper(int[] nums, int low, int high) {
+    int helper(int[] nums, int low, int high) {
         if (low == high) {
             return nums[low];
         }
@@ -205,7 +205,7 @@ class Solution169_rec {
         return leftCount > rightCount ? leftMaj : rightMaj;
     }
 
-    public int count(int[] nums, int begin, int end, int target) {
+    int count(int[] nums, int begin, int end, int target) {
         int count = 0;
         for (int i = begin; i <= end; i++) {
             if (nums[i] == target) {
@@ -236,7 +236,7 @@ class Solution78 {
         return res;
     }
 
-    public void backtrack(int begin, int[] nums, List<List<Integer>> res, Deque<Integer> current) {
+    void backtrack(int begin, int[] nums, List<List<Integer>> res, Deque<Integer> current) {
         res.add(new LinkedList<>(current));
         for (int i = begin; i < nums.length; i++) {
             current.add(nums[i]);
@@ -289,7 +289,7 @@ class Solution17 {
         return ans;
     }
 
-    private void helper(char[][] map, int[] input, int idx, StringBuilder sb, List<String> ans) {
+    void helper(char[][] map, int[] input, int idx, StringBuilder sb, List<String> ans) {
         if (idx == input.length) {
             ans.add(sb.toString());
         } else {
@@ -339,7 +339,7 @@ class Solution51 {
     }
 
 
-    public void helper(int row, int n, int[] queens, HashSet<Integer> colSet,
+    void helper(int row, int n, int[] queens, HashSet<Integer> colSet,
                        HashSet<Integer> diaSet1,  HashSet<Integer> diaSet2, List<List<String>> res) {
         if (row == n) {
 
@@ -411,7 +411,7 @@ class Solution322 {
         return res == Integer.MAX_VALUE ? -1 : res;
     }
 
-    private void helper(int[] coins, int amount, int depth, int count) {
+    void helper(int[] coins, int amount, int depth, int count) {
         if (amount == 0) {
             res = Math.min(res, count);
             return;

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * @description: 基本操作
  * @author: 吕立屏
@@ -62,5 +64,46 @@ class Solution4 {
             while (k <= half && j < nums2.length) merge[k++] = nums2[j++];
         }
         return n % 2 == 1 ? merge[half] : (double) (merge[half] + merge[half - 1]) / 2;
+    }
+}
+
+
+/**
+ * @decription: 215.数组中的第k个最大元素（不是最大的第k个不同）
+ * @solution: 排序，返回倒数第k个
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/kth-largest-element-in-an-array/
+ * @date: 2021/3/18
+ */
+class Solution215 {
+    public int findKthLargest(int[] nums, int k) {
+//        Arrays.sort(nums);
+        quickSort(nums, 0, nums.length - 1);
+        return nums[nums.length - k];
+    }
+
+    void quickSort(int[] nums, int left, int right) {
+        int l = left, r = right, mid = l + (r - l) / 2;
+        int pivot = nums[mid], temp;
+        while (l < r) {
+            while (nums[l] < pivot) l++;
+            while (nums[r] > pivot) r--;
+            if (l >= r) break;
+            temp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = temp;
+            if (nums[l] == pivot) r--;
+            if (nums[r] == pivot) l++;
+        }
+        if (l == r) {
+            l++;
+            r--;
+        }
+        if (l < right) {
+            quickSort(nums, l, right);
+        }
+        if (left < r) {
+            quickSort(nums, left, r);
+        }
     }
 }

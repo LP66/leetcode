@@ -40,7 +40,7 @@ class Solution94 {
         return list;
     }
 
-    public void inorder(TreeNode root, List<Integer> list) {
+    void inorder(TreeNode root, List<Integer> list) {
         if (root == null) return;
         inorder(root.left, list);
         list.add(root.val);
@@ -62,7 +62,7 @@ class Solution226 {
         return root;
     }
 
-    private void preorder(TreeNode root) {
+    void preorder(TreeNode root) {
         if (root == null) return;
         TreeNode left = root.left;
         root.left = root.right;
@@ -90,7 +90,7 @@ class Solution98 {
         return res;
     }
 
-    private void validate(TreeNode node, long min, long max) {
+    void validate(TreeNode node, long min, long max) {
         if (node == null) return;
         if (node.val <= min || node.val >= max) {
             res = false;
@@ -225,4 +225,40 @@ class Solution515 {
         }
         return res;
     }
+}
+
+
+/**
+ * @decription: 230.二叉搜索树中第k小的元素
+ * @solution: 二叉搜索树满足性质：中序遍历，元素value递增，中序逆遍历，元素value递减
+ *            所以找第k小，只要中序中判断k次就能到达第k小元素
+ *            如果要找第k大，用中序逆遍历中判断k次便可
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/
+ * @date: 2021/3/18
+ */
+class Solution230 {
+
+    int target;
+    int current;
+    int res;
+
+    public int kthSmallest(TreeNode root, int k) {
+        target = k;
+        inorder(root);
+        return res;
+    }
+
+    void inorder(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        inorder(node.left);
+        if (++current == target) {
+            res = node.val;
+            return;
+        }
+        inorder(node.right);
+    }
+
 }

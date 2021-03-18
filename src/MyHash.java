@@ -139,8 +139,7 @@ class Solution136_set {
 
 /**
  * @decription: 136.只出现一次的数字，返回给定数组中只出现一次的一个数字
- * @solution: 利用两个访问时间O(1)的Set，先假定所有数字只出现一次，第一次遍历全部加到结果集中
- *            第二次遍历用另一个set逐个add，false说明set中已存在此元素，此元素是重复出现的，则可以将结果集中对应的数去除
+ * @solution: 基于此题非一次的数字都只出现两次，可以使用一个Set解决
  * @difficulty: 简单
  * @url: https://leetcode-cn.com/problems/single-number/
  * @date: 2021/3/12
@@ -174,7 +173,7 @@ class Solution3 {
         System.out.println(new Solution3().lengthOfLongestSubstring("abcd"));
     }
 
-    public int lengthOfLongestSubstring(String s) {
+    int lengthOfLongestSubstring(String s) {
         if (s.isEmpty()) return 0;
         char[] cs = s.toCharArray();
         Set<Character> set = new HashSet<>();

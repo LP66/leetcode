@@ -89,7 +89,7 @@ class Solution200 {
         return count;
     }
 
-    private void dfsAndRecord(char[][] grid, int r, int c) {
+    void dfsAndRecord(char[][] grid, int r, int c) {
         // 出界，再见
         if (r == -1 || r == grid.length || c == -1 || c == grid[r].length) {
             return;

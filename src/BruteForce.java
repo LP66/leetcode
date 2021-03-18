@@ -63,7 +63,7 @@ class Solution5 {
         return res;
     }
 
-    public boolean judge(String s) {
+    boolean judge(String s) {
         for (int l = 0, r = s.length() - 1; l < r; l++, r--) {
             if (s.charAt(l) != s.charAt(r)) {
                 return false;

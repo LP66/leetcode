@@ -202,7 +202,7 @@ class Solution189_rotate {
     }
 
     // 反转数组的函数
-    public void reverse(int[] nums, int start, int end) {
+    void reverse(int[] nums, int start, int end) {
         while (start < end) {
             int temp = nums[start];
             nums[start++] = nums[end];
