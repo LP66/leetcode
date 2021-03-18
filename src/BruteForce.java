@@ -34,3 +34,41 @@ class Solution84_bf {
         return res;
     }
 }
+
+
+/**
+ * @decription: 5.最长回文串
+ * @solution: 暴力遍历所有子串，判定当前子串是否比记录的最长回文子串还长
+ *            是则判断是否回文串，是回文穿则更新
+ * @difficulty: 中等
+ * @url:
+ * @date: 2021/3/18
+ */
+class Solution5 {
+    public String longestPalindrome(String s) {
+        if (s.length() == 0 || s.length() == 1) return s;
+        int max = 0;
+        String res = "";
+        for (int i = 0; i < s.length() - 1; i++) {
+            for (int j = i; j < s.length(); j++) {
+                if (j - i + 1 < max) continue;
+                // 注意左闭右开，第二个传参是不包括的
+                String subS = s.substring(i, j + 1);
+                if (judge(subS)) {
+                    res = subS;
+                    max = subS.length();
+                }
+            }
+        }
+        return res;
+    }
+
+    public boolean judge(String s) {
+        for (int l = 0, r = s.length() - 1; l < r; l++, r--) {
+            if (s.charAt(l) != s.charAt(r)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
