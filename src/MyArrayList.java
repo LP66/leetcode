@@ -244,3 +244,58 @@ class Solution136 {
         return -1;
     }
 }
+
+
+/**
+ * @decription: 747.至少是其他数字两倍的最大数
+ * @solution: 一次遍历找最大，一次遍历比对2倍约束
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/largest-number-at-least-twice-of-others/
+ * @date: 2021/3/18
+ */
+class Solution747 {
+    public int dominantIndex(int[] nums) {
+        int idx = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] >= nums[idx]) {
+                idx = i;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (2 * nums[i] > nums[idx]) {
+                if (i == idx) {
+                    continue;
+                }
+                return -1;
+            }
+        }
+        return idx;
+    }
+}
+
+
+/**
+ * @decription: 724.寻找数组的中心下标
+ * @solution: 一次遍历求和，一次遍历比对当前左边累计和是否满足与sum的关系
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/find-pivot-index/
+ * @date: 2021/3/18
+ */
+class Solution724 {
+    public int pivotIndex(int[] nums) {
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+        }
+        int leftSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0) {
+                leftSum += nums[i - 1];
+            }
+            if (leftSum * 2 == sum - nums[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}

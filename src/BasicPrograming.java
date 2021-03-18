@@ -107,3 +107,27 @@ class Solution215 {
         }
     }
 }
+
+
+/**
+ * @decription: 66.加一，给定每位单数字的数组，最后一位加1
+ * @solution: 注意一下进位
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/plus-one/
+ * @date: 2021/3/18
+ */
+class Solution66 {
+    public int[] plusOne(int[] digits) {
+        int n = digits.length;
+        for (int i = n - 1; i >= 0; i--) {
+            ++digits[i];
+            digits[i] %= 10;
+            if (digits[i] != 0) {
+                return digits;
+            }
+        }
+        digits = new int[n + 1];
+        digits[0] = 1;
+        return digits;
+    }
+}

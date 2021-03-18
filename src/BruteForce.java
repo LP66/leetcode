@@ -72,3 +72,34 @@ class Solution5 {
         return true;
     }
 }
+
+
+/**
+ * @decription: 724.寻找数组的中心下标
+ * @solution: 暴力遍历，分别计算左右两侧的和, 会有大量重复计算导致慢
+ *            建议看另一个Solution比对总结
+ * @difficulty: 简单
+ * @url: https://leetcode-cn.com/problems/find-pivot-index/
+ * @date: 2021/3/18
+ */
+class Solution724_bf {
+
+    public int pivotIndex(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            int left = sum(nums, 0, i - 1);
+            int right = sum(nums, i + 1, nums.length - 1);
+            if (left == right) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    int sum(int[] nums, int l, int r) {
+        int sum = 0;
+        for (int i = l; i <= r; i++) {
+            sum += nums[i];
+        }
+        return sum;
+    }
+}
