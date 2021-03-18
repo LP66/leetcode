@@ -34,3 +34,33 @@ class Solution415 {
         return sb.reverse().toString();
     }
 }
+
+
+/**
+ * @decription: 4.寻找两个正序数组的中位数
+ * @solution: 有序合并两个数组的前部分，使得新数组有两个加起来一半长就行
+ *            奇数长度：返回正中间 n / 2
+ *            偶数长度：返回中间两个和的一半 n / 2 - 1, n / 2
+ * @difficulty:
+ * @url:
+ * @date: 2021/3/18
+ */
+class Solution4 {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length + nums2.length, half = n / 2;
+        int[] merge = new int[n];
+        int i = 0, j = 0, k = 0;
+        while (k <= half && i < nums1.length && j < nums2.length) {
+            if (nums1[i] < nums2[j]) {
+                merge[k++] = nums1[i++];
+            } else {
+                merge[k++] = nums2[j++];
+            }
+        }
+        if (k <= half) {
+            while (k <= half && i < nums1.length) merge[k++] = nums1[i++];
+            while (k <= half && j < nums2.length) merge[k++] = nums2[j++];
+        }
+        return n % 2 == 1 ? merge[half] : (double) (merge[half] + merge[half - 1]) / 2;
+    }
+}
