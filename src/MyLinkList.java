@@ -127,3 +127,33 @@ class Solution206 {
         return prev;    // prev已到达原来尾节点，即新链表头节点
     }
 }
+
+
+/**
+ * @decription: 两数相加，两条逆序存储数字的链表，每个节点一位数字，返回相同组织形式的两数之和
+ * @solution: 类似题415字符串相加，注意一下用head节点定头，有current节点打江山把后续节点加进去
+ * @difficulty: 中等
+ * @url: https://leetcode-cn.com/problems/add-two-numbers/
+ * @date: 2021/3/18
+ */
+class Solution2 {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int carry = 0;
+        ListNode head = new ListNode(0);
+        ListNode current = head;
+        while (l1 != null || l2 != null) {
+            int n1 = l1 == null ? 0 : l1.val;
+            int n2 = l2 == null ? 0 : l2.val;
+            int temp = n1 + n2 + carry;
+            carry = temp / 10;
+            current.next = new ListNode(temp % 10);
+            current = current.next;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        if (carry == 1) {
+            current.next = new ListNode(1);
+        }
+        return head.next;
+    }
+}
