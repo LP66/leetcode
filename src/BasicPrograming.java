@@ -43,8 +43,8 @@ class Solution415 {
  * @solution: 有序合并两个数组的前部分，使得新数组有两个加起来一半长就行
  *            奇数长度：返回正中间 n / 2
  *            偶数长度：返回中间两个和的一半 n / 2 - 1, n / 2
- * @difficulty:
- * @url:
+ * @difficulty: 困难
+ * @url: https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
  * @date: 2021/3/18
  */
 class Solution4 {

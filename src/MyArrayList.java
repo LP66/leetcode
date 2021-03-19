@@ -275,7 +275,7 @@ class Solution747 {
 
 
 /**
- * @decription: 724.寻找数组的中心下标
+ * @decription: 724.寻找数组的中心下标，下标左右两边所有数字之和相等
  * @solution: 一次遍历求和，一次遍历比对当前左边累计和是否满足与sum的关系
  * @difficulty: 简单
  * @url: https://leetcode-cn.com/problems/find-pivot-index/
