@@ -53,11 +53,7 @@ class Solution4 {
         int[] merge = new int[n];
         int i = 0, j = 0, k = 0;
         while (k <= half && i < nums1.length && j < nums2.length) {
-            if (nums1[i] < nums2[j]) {
-                merge[k++] = nums1[i++];
-            } else {
-                merge[k++] = nums2[j++];
-            }
+            merge[k++] = nums1[i] < nums2[j] ? nums1[i++] : nums2[j++];
         }
         if (k <= half) {
             while (k <= half && i < nums1.length) merge[k++] = nums1[i++];

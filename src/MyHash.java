@@ -72,15 +72,13 @@ class Solution242 {
 class Solution49 {
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs.length == 0) return new ArrayList<>();
-        Map<String, List> res = new HashMap<>();
+        Map<String, List<String>> res = new HashMap<>();
         for (String s : strs) {
             char[] cs = s.toCharArray();
             Arrays.sort(cs);
-            String key = String.valueOf(cs);
-            if (!res.containsKey(key)) res.put(key, new ArrayList());
-            res.get(key).add(s);
+            res.getOrDefault(String.valueOf(cs), new LinkedList<>()).add(s);
         }
-        return new ArrayList(res.values());
+        return new LinkedList<>(res.values());
     }
 }
 
