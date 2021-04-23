@@ -77,7 +77,7 @@ class Solution21 {
  *            快指针到达链尾时，慢指针便在倒数第n+1个节点，
  *            这时直接让慢指针引用去修改 next = next.next,
  *            其中哨兵节点dummy的引入是为了简化极端情况的处理，
- *            防止传入链表仅有一个元素
+ *            防止传入链表仅有一个元素，也防止删除的恰好是头节点
  * @difficulty: 中等
  * @url: https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
  * @date: 2020/5/16
