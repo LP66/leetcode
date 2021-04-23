@@ -38,16 +38,16 @@ class Solution242_sort {
  */
 class Solution169_balance {
     public int majorityElement(int[] nums) {
-        int majI = 0, balance = 1;
-        for (int i : nums) {
-            if (i == majI) {
-                balance++;
-            } else if (--balance == 0) {
-                majI = i;
-                balance = 1;
+        int indexOfMaj = 0, count = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[indexOfMaj]) {
+                count++;
+            } else if (--count == 0){
+                indexOfMaj = i;
+                count = 1;
             }
         }
-        return majI;
+        return nums[indexOfMaj];
     }
 }
 
